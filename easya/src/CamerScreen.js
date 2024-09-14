@@ -1,14 +1,11 @@
 import React, { useState, useRef } from 'react';
 
 // Function to send image to OpenAI API and receive response
-const sendToOpenAI = async (base64) => {
+const sendToOpenAI = async (base64, type) => {
   const apiKey = "sk-y572_ewyYAVZ-iq-hrrGks88wbXaOI6SqbbbL_BXNLT3BlbkFJCJFOq_2nHGJvmAOYgF9yVKimblYY7mVGPLgh7UsykA"; // Read the API key from environment variables
   const endpoint = "https://api.openai.com/v1/chat/completions"; // Correct API endpoint
-  console.log("API Key:", apiKey);
-
+  
   try {
-    console.log('Sending request to OpenAI API with key:', apiKey); // Debug logging
-
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -21,12 +18,14 @@ const sendToOpenAI = async (base64) => {
           {
             role: 'user',
             content: [
-              { 
-                type: 'text', 
-                text: `Given this image of a receipt, extract the items that have been bought, the store/brand name, and the date of purchase.
+              {
+                type: 'text',
+                text: type === 'receipt'
+                  ? `Given this image of a receipt, extract the items that have been bought, the store/brand name, and the date of purchase.
                 The return value must be in JSON format, do not enclose it in any comments. This is an example: {"items": {"item1": quantity1, "item2": quantity2}, "brand": "storeName", "date": "YYYY-MM-DD"}.
                 The items should be those purchased, and the quantity bought. If a quantity cannot be determined, mark it as 1.
-                If a date or brand cannot be identified, return null for them.` 
+                If a date or brand cannot be identified, return null for them.`
+                  : `Given this image of a shirt, identify the fabric type. Return the result as a plain text.`,
               },
               {
                 type: 'image_url',
@@ -47,9 +46,7 @@ const sendToOpenAI = async (base64) => {
     }
 
     const data = await response.json();
-    const jsonString = data.choices[0].message.content.trim();
-    console.log(jsonString);
-    return JSON.parse(jsonString);
+    return data.choices[0].message.content.trim();
   } catch (error) {
     console.error('API Error:', error);
     throw error;
@@ -57,11 +54,14 @@ const sendToOpenAI = async (base64) => {
 };
 
 export default function ImageUploadScreen() {
-  const [photoData, setPhotoData] = useState(null); // State to store the uploaded image data
-  const [result, setResult] = useState(null); // State to store the final result
-  const fileInputRef = useRef(null); // Reference to the file input
+  const [photoData, setPhotoData] = useState(null); // State to store the uploaded receipt image data
+  const [shirtData, setShirtData] = useState(null); // State to store the uploaded shirt image data
+  const [result, setResult] = useState(null); // State to store the receipt result
+  const [fabricResult, setFabricResult] = useState(null); // State to store the fabric result
+  const fileInputRef = useRef(null); // Reference to the file input for receipt
+  const shirtInputRef = useRef(null); // Reference to the file input for shirt
 
-  // Handle file upload and processing
+  // Handle file upload for receipt and processing
   const handleFileChange = async (e) => {
     const file = e.target.files[0]; // Get the uploaded file
     if (file) {
@@ -72,10 +72,11 @@ export default function ImageUploadScreen() {
 
         try {
           // Send base64 string to OpenAI for processing
-          const values = await sendToOpenAI(base64String);
+          const values = await sendToOpenAI(base64String, 'receipt');
 
           // Extract date, brand, and items from OpenAI's response
-          const { items, brand, date } = values;
+          const parsedValues = JSON.parse(values);
+          const { items, brand, date } = parsedValues;
 
           if (!date) {
             alert('Date not found in the receipt.');
@@ -106,6 +107,29 @@ export default function ImageUploadScreen() {
     }
   };
 
+  // Handle file upload for shirt and processing
+  const handleShirtFileChange = async (e) => {
+    const file = e.target.files[0]; // Get the uploaded file
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64String = reader.result.split(',')[1]; // Extract base64 from DataURL
+        setShirtData(reader.result); // Save base64 DataURL to display the image
+
+        try {
+          // Send base64 string to OpenAI for processing
+          const fabricType = await sendToOpenAI(base64String, 'shirt');
+          setFabricResult(fabricType);
+
+          alert(`Fabric type detected: ${fabricType}`);
+        } catch (error) {
+          alert('Error processing shirt image. Please try again.');
+        }
+      };
+      reader.readAsDataURL(file); // Convert the file to base64 (DataURL)
+    }
+  };
+
   // Function to reset the uploaded image and allow the user to upload another one
   const retakePicture = () => {
     setPhotoData(null); // Reset the uploaded image
@@ -115,16 +139,25 @@ export default function ImageUploadScreen() {
     }
   };
 
+  // Function to reset the uploaded shirt image and result
+  const retakeShirtPicture = () => {
+    setShirtData(null); // Reset the uploaded shirt image
+    setFabricResult(null); // Clear the fabric result
+    if (shirtInputRef.current) {
+      shirtInputRef.current.value = ''; // Clear the shirt file input
+    }
+  };
+
   return (
     <div style={styles.container}>
+      {/* Receipt Image Upload Section */}
       {photoData ? (
-        // Display the uploaded photo and provide an option to upload a new one
         <div style={styles.container}>
-          <img src={photoData} alt="Uploaded" style={styles.capturedPhoto} />
-          <button onClick={retakePicture}>Retake Photo</button>
+          <img src={photoData} alt="Uploaded Receipt" style={styles.capturedPhoto} />
+          <button onClick={retakePicture}>Retake Receipt Photo</button>
           {result && (
             <div style={styles.resultContainer}>
-              <h3>Result</h3>
+              <h3>Receipt Result</h3>
               <p><strong>Brand:</strong> {result.brand}</p>
               <p><strong>Date within 2 days:</strong> {result.isWithinTwoDays ? "Yes" : "No"}</p>
               <p><strong>Items Purchased:</strong></p>
@@ -137,7 +170,6 @@ export default function ImageUploadScreen() {
           )}
         </div>
       ) : (
-        // If no image has been uploaded yet, show the file input and upload button
         <div>
           <input
             ref={fileInputRef}
@@ -146,7 +178,32 @@ export default function ImageUploadScreen() {
             onChange={handleFileChange}
             style={styles.input}
           />
-          <button onClick={() => fileInputRef.current.click()}>Upload Image</button>
+          <button onClick={() => fileInputRef.current.click()}>Upload Receipt Image</button>
+        </div>
+      )}
+
+      {/* Shirt Image Upload Section */}
+      {shirtData ? (
+        <div style={styles.container}>
+          <img src={shirtData} alt="Uploaded Shirt" style={styles.capturedPhoto} />
+          <button onClick={retakeShirtPicture}>Retake Shirt Photo</button>
+          {fabricResult && (
+            <div style={styles.resultContainer}>
+              <h3>Fabric Type</h3>
+              <p>{fabricResult}</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          <input
+            ref={shirtInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleShirtFileChange}
+            style={styles.input}
+          />
+          <button onClick={() => shirtInputRef.current.click()}>Upload Shirt Image</button>
         </div>
       )}
     </div>
