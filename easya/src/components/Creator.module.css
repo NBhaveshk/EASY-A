@@ -1,6 +1,66 @@
-.selected_images {
+.coverImageContainer {
+    text-align: center;
+}
+
+.selectedImages {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     height: 150px;
     gap: 1em;
+    margin-bottom: 20px;
+}
+
+.coverImage {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #0a0a23;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.buttonDisabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.clothesContainer {
+    text-align: center;
+}
+
+.clothesImages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.clothesImage {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
 }
