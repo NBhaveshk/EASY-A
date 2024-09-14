@@ -1,19 +1,95 @@
 .header {
-    text-align: center; 
+    position: relative;
+    text-align: center;
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 15px;
-    padding-top: 20px;
     border-bottom: 2px solid black;
     font-family: 'Playwrite CU', sans-serif;
-    background: rgba(247, 146, 151, 0.5);
+    background: rgba(247, 146, 151);
 }
 
-.header h1,
-.header p {
+.header h1 {
     margin: 0;
-    padding: 0; /* No padding */
+    padding: 0;
 }
 
+.header p {
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+}
+
+.menu>input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: 1;
+}
+
+.menu>input:hover {
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    background-color: rgba(250, 250, 250, 0.9);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    width: max-content;
+    flex-direction: column;
+}
+
+.dropdown>* {
+    padding: 1em;
+}
+
+.menu>input:checked~.dropdown {
+    display: flex;
+}
+
+.dropdown button {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    font-family: 'Playwrite CU', sans-serif;
+    cursor: pointer;
+}
+
+.dropdown button:hover {
+    background-color: rgba(247, 146, 151, 0.5);
+}
+
+.icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 2.2em;
+    color: rgba(128, 32, 32);
+}
+
+.menu>input:hover~.icon {
+    color: rgba(256, 128, 128);
+    background-color: rgba(255, 255, 255, 0.1);
+}
