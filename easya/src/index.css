@@ -4,9 +4,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  background: url('../assets/image1.jpg') no-repeat center center fixed;
+  margin: 0;
+  /* Remove default margin */
+  padding: 0;
+  /* Remove default padding */
   background-size: cover;
 }
 
