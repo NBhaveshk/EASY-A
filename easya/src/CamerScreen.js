@@ -25,7 +25,8 @@ const sendToOpenAI = async (base64, type) => {
                 The return value must be in JSON format, do not enclose it in any comments. This is an example: {"items": {"item1": quantity1, "item2": quantity2}, "brand": "storeName", "date": "YYYY-MM-DD"}.
                 The items should be those purchased, and the quantity bought. If a quantity cannot be determined, mark it as 1.
                 If a date or brand cannot be identified, return null for them.`
-                  : `Given this image of a shirt, identify the fabric type. Return the result as a plain text.`,
+                  : `Given this image of a cloth, identify the fabric type and provide a very short description about the cloth. 
+                The return value must be in JSON format, do not enclose it in any comments. This is an example: {"fabric":"cloth fabric","description":"a very short description"}.`,
               },
               {
                 type: 'image_url',
@@ -118,10 +119,19 @@ export default function ImageUploadScreen() {
 
         try {
           // Send base64 string to OpenAI for processing
-          const fabricType = await sendToOpenAI(base64String, 'shirt');
-          setFabricResult(fabricType);
+          const fabricResponse = await sendToOpenAI(base64String, 'shirt');
+          
+          // Parse JSON response
+          const parsedValues = JSON.parse(fabricResponse);
+          const { fabric, description } = parsedValues;
 
-          alert(`Fabric type detected: ${fabricType}`);
+          // Prepare the result to display
+          setFabricResult({
+            fabric: fabric || "Unknown Fabric",
+            description: description || "No description available",
+          });
+
+          alert(`Fabric type detected: ${fabric || "Unknown Fabric"}. Description: ${description || "No description available"}`);
         } catch (error) {
           alert('Error processing shirt image. Please try again.');
         }
@@ -190,7 +200,8 @@ export default function ImageUploadScreen() {
           {fabricResult && (
             <div style={styles.resultContainer}>
               <h3>Fabric Type</h3>
-              <p>{fabricResult}</p>
+              <p><strong>Fabric:</strong> {fabricResult.fabric}</p>
+              <p><strong>Description:</strong> {fabricResult.description}</p>
             </div>
           )}
         </div>
