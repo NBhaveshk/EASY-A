@@ -1,15 +1,17 @@
 import styles from './Navigation.module.css';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../Context';
+import { ReactComponent as CreateIcon } from '../assets/icons/create.svg';
+import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
+import { ReactComponent as HistoryIcon } from '../assets/icons/history.svg';
+
 
 export default function Header({ className }) {
-    const { wallet_id } = useAuth()
     return (
         <nav className={styles.navigation}>
             <div className={styles.options}>
-                {wallet_id && <Link to="/">Posts</Link>}
-                {wallet_id && <Link to="/create">Create</Link>}
-                {wallet_id && <Link to="/notifications">Notifications</Link>}
+                <Link to="/"><HomeIcon className={styles.icon} /></Link>
+                <Link to="/create"><CreateIcon className={styles.icon} /></Link>
+                <Link to="/notifications"><HistoryIcon className={styles.icon} /></Link>
             </div>
         </nav>
     )

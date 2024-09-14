@@ -1,16 +1,30 @@
 .navigation {
     width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2em;
+    padding: 0 0 1em 0;
+    background-color: white;
 }
 
 .options {
     display: flex;
     justify-content: center;
-    gap: 1em;
+    gap: 3em;
 }
 
 .options>div {}
+
+.icon {
+    color: #6c757d;
+    height: 24px;
+    width: 24px;
+    transition: color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.navigation a {
+    padding: 1em;
+}
+
+.navigation a:hover .icon {
+    color: #007bff;
+    transform: translateY(-3px);
+}

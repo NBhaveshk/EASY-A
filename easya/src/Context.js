@@ -20,8 +20,12 @@ export default function Context({ children }) {
         set_post_modal_data()
     }
 
+    function logout() {
+        set_wallet_id(null)
+    }
+
     return (
-        <AuthContext.Provider value={{ wallet_id, set_wallet_id }}>
+        <AuthContext.Provider value={{ wallet_id, set_wallet_id, logout }}>
             <PostModalContext.Provider value={{ set_post_modal_data, clear_post_modal_data }}>
                 {post_modal_data && <PostModal data={post_modal_data} />}
                 {children}
