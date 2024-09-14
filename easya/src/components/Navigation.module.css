@@ -1,0 +1,16 @@
+.navigation {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2em;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.options>div {}
