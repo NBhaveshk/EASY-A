@@ -6,10 +6,9 @@
     justify-content: center;
     align-items: center;
     padding: 15px;
-    padding-top: 20px;
     border-bottom: 2px solid black;
     font-family: 'Playwrite CU', sans-serif;
-    background: rgba(247, 146, 151, 0.5);
+    background: rgba(247, 146, 151);
 }
 
 .header h1 {
