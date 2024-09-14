@@ -5,8 +5,8 @@ export default function Header() {
     const { wallet_id } = useAuth()
     return (
         <header className={styles.header}>
-            <h1>EasyA</h1>
-            <p>{wallet_id}</p>
+            <h1>Fashion Fiesta</h1>
+            <p>Wallet ID: {wallet_id}</p>
         </header>
     )
 }

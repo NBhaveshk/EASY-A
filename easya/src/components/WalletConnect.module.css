@@ -1,0 +1,21 @@
+.buttonContainer {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin: 20px; /* Add space around the div */
+}
+
+.buttonContainer button {
+    background-color: rgba(217, 151, 151, 0.2);
+    color: rgb(255, 255, 255); /* Text color for the button */
+    border: 2px solid rgb(255, 255, 255); /* Remove default border */
+    padding: 10px 20px; /* Space inside the button */
+    border-radius: 3px;
+    border-radius: 10px;
+    font-size: 16px; /* Font size for the button text */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}  
+
+.buttonContainer button:hover {
+    background-color: #e64d4d;
+}

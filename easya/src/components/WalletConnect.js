@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context';
 import Connex from '@vechain/connex';
+import styles from './WalletConnect.module.css'; 
+
 
 const WalletConnect = () => {
   const [connex, setConnex] = useState(null);
@@ -41,7 +43,7 @@ const WalletConnect = () => {
   };
 
   return (
-    <div>
+    <div className={styles.buttonContainer}>
       <button onClick={handleConnectWallet}>
         {wallet_id ? 'Wallet Connected' : 'Connect Wallet'}
       </button>

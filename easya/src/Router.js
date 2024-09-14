@@ -12,8 +12,8 @@ export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<Layout />}>
                     {!wallet_id && <Route path="/" element={<Login />} />}
+                <Route element={<Layout />}>
                     {wallet_id && <Route path="/" element={<Community />} />}
                     {wallet_id && <Route path="/create" element={<Create />} />}
                     {wallet_id && <Route path="/notifications" element={<Notifications />} />}
