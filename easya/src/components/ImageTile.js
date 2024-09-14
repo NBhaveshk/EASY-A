@@ -10,6 +10,8 @@ const ImageTile = ({ imageSrc, altText, onClick }) => {
         onClick={onClick}
         className="image-tile-img"
       />
+      
+      <div className={styles.wordform}>Description</div> 
     </div>
   );
 };

@@ -5,10 +5,49 @@
     align-items: center;
     overflow: hidden; 
     flex: 1 1 calc(30% - 10px); 
+    position: relative; /* Position the box relative to its normal position */
+    display: inline-block; /* Fit the box to its content */
+    border: 3px solid transparent; /* Create space for the border text */
+    padding: 10px; /* Space inside the box */
+    padding-bottom: 70px;
+    background-color: #fff; /* Background color of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
 }
 
 .image_tile img {
     width: 100%;
     height: auto;
     object-fit: cover;
+    border-radius: 10%;
+    aspect-ratio: 1;
+}
+
+.wordform {
+    position: absolute; /* Position the text absolutely within the box */
+    bottom: 10px; /* Position at the bottom of the box */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to center the text */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional background for better readability */
+    padding: 5px 10px; /* Space around the text */
+    border: 2px solid #333; /* Optional border around the text */
+    border-radius: 5px; /* Optional rounded corners */
+    color: #333; /* Text color */
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    z-index: 1; /* Ensure it appears above other content */
+}
+
+.border_text {
+    position: absolute; 
+    top: -20px; /* Adjust the position of the text relative to the box */
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: #fff; 
+    padding: 5px; 
+    border: 2px solid #333; 
+    border-radius: 5px; 
+    color: #333; 
+    font-size: 14px; 
+    font-weight: bold;
+    z-index: 2; /* Ensure it stays above other elements */
 }
