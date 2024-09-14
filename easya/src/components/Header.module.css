@@ -9,6 +9,7 @@
     border-bottom: 2px solid black;
     font-family: 'Playwrite CU', sans-serif;
     background: rgba(247, 146, 151);
+    z-index: 2;
 }
 
 .header h1 {
