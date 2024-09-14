@@ -1,0 +1,15 @@
+.image_tile {
+    box-sizing: border-box;
+    display: flex; /* Use flexbox to align the image within the tile */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    overflow: hidden; /* Hide overflow if the image is larger than the container */
+    flex: 1 1 calc(50% - 10px); 
+}
+
+.image_tile img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    /* max-height: 300px; Set a max height for the images */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+}

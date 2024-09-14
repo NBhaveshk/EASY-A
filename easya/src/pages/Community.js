@@ -1,13 +1,10 @@
-import { usePostModal } from "../Context"
+import ImageGrid from '../components/ImageModal'; // Ensure the path is correct
 
-export default function Community() {
-    const { set_post_modal_data } = usePostModal()
+export default function App() {
     return (
-        <main>
-            <div>
-                <h1>Community</h1>
-                <button onClick={() => set_post_modal_data({ id: 1, author: "author", date: "date", cover_image: <img src="https://picsum.photos/400/400" alt="random post" /> })}>Open Post Modal</button>
-            </div>
-        </main>
-    )
+        <div className="App">
+            <h1 style={{ textAlign: 'center', fontSize: '10rem' }}>Fashion Fiesta</h1>
+            <ImageGrid />  {/* Render the ImageGrid component */}
+        </div>
+    );
 }
