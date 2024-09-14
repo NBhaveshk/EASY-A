@@ -1,0 +1,15 @@
+.selector {
+    padding: 2em;
+    border: 4px solid rgba(0, 32, 64, 0.2);
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selector:hover {
+    cursor: pointer;
+    border-color: rgba(0, 32, 64, 0.4);
+}
+
+.selector>p {}

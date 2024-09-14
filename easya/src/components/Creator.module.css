@@ -1,0 +1,6 @@
+.selected_images {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    gap: 1em;
+}
