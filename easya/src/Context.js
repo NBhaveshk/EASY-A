@@ -13,7 +13,7 @@ export function usePostModal() {
 }
 
 export default function Context({ children }) {
-    const [wallet_id, set_wallet_id] = useState(null);
+    const [wallet_id, set_wallet_id] = useState("REMOVE THIS REMOVE THIS");
     const [post_modal_data, set_post_modal_data] = useState(null);
 
     function clear_post_modal_data() {
