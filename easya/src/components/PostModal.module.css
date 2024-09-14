@@ -20,14 +20,18 @@
     border-radius: 8px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
     padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+    width: min-content;
 }
 
 .image_container {
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 800px;
-    height: 800px;
+    width: 600px;
+    height: 600px;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -43,7 +47,7 @@
     height: 100%;
     flex-shrink: 0;
     scroll-snap-align: center;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .image_controller {
