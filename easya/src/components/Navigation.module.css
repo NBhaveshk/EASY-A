@@ -4,14 +4,14 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1em 0 2em 0;
+    padding: 0 0 1em 0;
     background-color: white;
 }
 
 .options {
     display: flex;
     justify-content: center;
-    gap: 4em;
+    gap: 3em;
 }
 
 .options>div {}
@@ -24,7 +24,11 @@
     cursor: pointer;
 }
 
-.icon:hover {
+.navigation a {
+    padding: 1em;
+}
+
+.navigation a:hover .icon {
     color: #007bff;
     transform: translateY(-3px);
 }
