@@ -1,11 +1,12 @@
 // src/WalletConnect.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../Context';
 import Connex from '@vechain/connex';
 
 const WalletConnect = () => {
   const [connex, setConnex] = useState(null);
   const [vendor, setVendor] = useState(null);
-  const [walletConnected, setWalletConnected] = useState(false);
+  const { wallet_id, set_wallet_id } = useAuth();
 
   useEffect(() => {
     // Initialize Connex
@@ -30,11 +31,11 @@ const WalletConnect = () => {
         .request()
         .then((r) => {
           console.log('Wallet connected:', r.annex.signer);
-          setWalletConnected(true);
+          set_wallet_id(r.annex.signer);
         })
         .catch((error) => {
           console.error('Error connecting wallet:', error);
-          setWalletConnected(false);
+          set_wallet_id(null);
         });
     }
   };
@@ -42,7 +43,7 @@ const WalletConnect = () => {
   return (
     <div>
       <button onClick={handleConnectWallet}>
-        {walletConnected ? 'Wallet Connected' : 'Connect Wallet'}
+        {wallet_id ? 'Wallet Connected' : 'Connect Wallet'}
       </button>
     </div>
   );
