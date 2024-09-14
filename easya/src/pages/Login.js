@@ -4,13 +4,11 @@ import WalletConnect from '../components/WalletConnect';
 
 export default function Community() {
     return (
-        <main>
-            <div className={styles.centered}>
-                <div className={styles.box}>
-                    <h1>Fashion Fiesta</h1>
-                    {<WalletConnect />}
-                </div>
+        <div className={styles.centered}>
+            <div className={styles.box}>
+                <h1>Fashion Fiesta</h1>
+                {<WalletConnect />}
             </div>
-        </main>
+        </div>
     )
 }

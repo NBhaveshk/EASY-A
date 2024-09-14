@@ -124,7 +124,7 @@ export default function Create() {
     };
 
     return (
-        <main>
+        <>
             <div>
                 <h1>Create</h1>
                 {JSON.stringify(clothes_data)}
@@ -134,6 +134,6 @@ export default function Create() {
             {step === 2 && <CreatorClothes clothes_images={clothes_images} set_clothes_images={set_clothes_images} onBack={previous_step} onComplete={next_step} />}
             {step === 3 && <CreatorReceipts receipt_images={receipt_images} set_receipt_images={set_receipt_images} onBack={previous_step} isNextAllowed={is_receipt_data_valid} onComplete={next_step} />}
             {step === 4 && <CreatorCaption cover_photo={cover_image} clothes_images={clothes_images} receipt_images={receipt_images} caption={caption} set_caption={set_caption} onBack={previous_step} onComplete={create_post} />}
-        </main>
+        </>
     )
 }
