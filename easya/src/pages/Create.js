@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from "react-router-dom";
 import CreatorCoverImage from '../components/CreatorCoverImage'
 import CreatorClothes from '../components/CreatorClothes'
 import CreatorReceipts from '../components/CreatorReceipts'
 import CreatorCaption from '../components/CreatorCaption'
+import { differenceInCalendarDays } from 'date-fns'
 
 export default function Create() {
     const [step, set_step] = useState(1)
@@ -13,6 +14,7 @@ export default function Create() {
     const [caption, set_caption] = useState("")
     const [clothes_data, set_clothes_data] = useState([])
     const [receipt_data, set_receipt_data] = useState([])
+    const is_receipt_data_valid = useCallback(() => receipt_data && receipt_data.length > 0 && receipt_data.every(data => data.is_within_two_days), [receipt_data])
     const navigate = useNavigate();
 
     function next_step() {
@@ -30,14 +32,36 @@ export default function Create() {
     useEffect(() => {
         if (clothes_images.length > 0) {
             const promises = clothes_images.map(image => sendToOpenAI(image.split(',')[1], 'clothes'))
-            Promise.all(promises).then(responses => set_clothes_data(responses))
+            Promise.all(promises).then(responses => {
+                responses = responses.map(response => {
+                    response = JSON.parse(response)
+                    console.log(response)
+                    return {
+                        fabric: response?.fabric || "Unknown Fabric",
+                        description: response?.description || "No description available"
+                    }
+                })
+                set_clothes_data(responses)
+            }
+            )
         }
     }, [clothes_images])
 
     useEffect(() => {
         if (receipt_images.length > 0) {
             const promises = receipt_images.map(image => sendToOpenAI(image.split(',')[1], 'receipt'))
-            Promise.all(promises).then(responses => set_receipt_data(responses))
+            Promise.all(promises).then(responses => {
+                responses = responses.map(response => {
+                    response = JSON.parse(response)
+                    return {
+                        items: response?.items || {},
+                        brand: response?.brand || "Unknown Brand",
+                        date: response?.date,
+                        is_within_two_days: response?.date ? differenceInCalendarDays(Date.now(), new Date(response?.date)) <= 10000 : false
+                    }
+                })
+                set_receipt_data(responses)
+            })
         }
     }, [receipt_images])
 
@@ -45,7 +69,7 @@ export default function Create() {
 
     }
 
-    async function sendToOpenAI(base64, type) {
+    const sendToOpenAI = async (base64, type) => {
         const apiKey = "sk-y572_ewyYAVZ-iq-hrrGks88wbXaOI6SqbbbL_BXNLT3BlbkFJCJFOq_2nHGJvmAOYgF9yVKimblYY7mVGPLgh7UsykA"; // Read the API key from environment variables
         const endpoint = "https://api.openai.com/v1/chat/completions"; // Correct API endpoint
 
@@ -69,7 +93,8 @@ export default function Create() {
                       The return value must be in JSON format, do not enclose it in any comments. This is an example: {"items": {"item1": quantity1, "item2": quantity2}, "brand": "storeName", "date": "YYYY-MM-DD"}.
                       The items should be those purchased, and the quantity bought. If a quantity cannot be determined, mark it as 1.
                       If a date or brand cannot be identified, return null for them.`
-                                        : `Given this image of a shirt, identify the fabric type. Return the result as a plain text.`,
+                                        : `Given this image of a cloth, identify the fabric type and provide a very short description about the cloth. 
+                      The return value must be in JSON format, do not enclose it in any comments. This is an example: {"fabric":"cloth fabric","description":"a very short description"}.`,
                                 },
                                 {
                                     type: 'image_url',
@@ -97,19 +122,16 @@ export default function Create() {
         }
     };
 
-    console.log(clothes_data)
-    console.log(receipt_data)
-
     return (
         <main>
             <div>
                 <h1>Create</h1>
-                {clothes_data}
-                {receipt_data}
+                {JSON.stringify(clothes_data)}
+                {JSON.stringify(receipt_data)}
             </div>
             {step === 1 && <CreatorCoverImage cover_image={cover_image} set_cover_image={set_cover_image} onComplete={next_step} onBack={() => navigate("/")} />}
             {step === 2 && <CreatorClothes clothes_images={clothes_images} set_clothes_images={set_clothes_images} onBack={previous_step} onComplete={next_step} />}
-            {step === 3 && <CreatorReceipts receipt_images={receipt_images} set_receipt_images={set_receipt_images} onBack={previous_step} onComplete={next_step} />}
+            {step === 3 && <CreatorReceipts receipt_images={receipt_images} set_receipt_images={set_receipt_images} onBack={previous_step} isNextAllowed={is_receipt_data_valid} onComplete={next_step} />}
             {step === 4 && <CreatorCaption cover_photo={cover_image} clothes_images={clothes_images} receipt_images={receipt_images} caption={caption} set_caption={set_caption} onBack={previous_step} onComplete={create_post} />}
         </main>
     )
