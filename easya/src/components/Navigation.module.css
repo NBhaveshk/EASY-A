@@ -4,13 +4,27 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 2em;
+    padding: 1em 0 2em 0;
+    background-color: white;
 }
 
 .options {
     display: flex;
     justify-content: center;
-    gap: 1em;
+    gap: 4em;
 }
 
 .options>div {}
+
+.icon {
+    color: #6c757d;
+    height: 24px;
+    width: 24px;
+    transition: color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: #007bff;
+    transform: translateY(-3px);
+}

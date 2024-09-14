@@ -19,7 +19,7 @@ export default function Header() {
                 <input type="checkbox" />
                 <Icon className={styles.icon} />
                 <div className={styles.dropdown}>
-                    <p>{wallet_id.slice(0, 16)}</p>
+                    <p><b>Wallet ID</b><br />{wallet_id.slice(0, 16)}</p>
                     <button onClick={handle_logout}>Logout</button>
                 </div>
             </div>
