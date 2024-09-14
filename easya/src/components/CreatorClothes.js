@@ -1,8 +1,7 @@
-import React from 'react'; // If you haven't already
 import FileSelector from "./FileSelector";
 import styles from './Creator.module.css';
 
-export default function CreatorClothes({ clothes_images, set_clothes_images, onBack, onComplete }) {
+export default function CreateClothes({ clothes_images, set_clothes_images, onBack, onComplete }) {
     return (
         <div className={styles.clothesContainer}>
             {clothes_images.length > 0 && (
@@ -12,13 +11,16 @@ export default function CreatorClothes({ clothes_images, set_clothes_images, onB
                     ))}
                 </div>
             )}
-            <FileSelector
-                set_files={set_clothes_images}
-                drag_active_text="Drop Clothes Here"
-                drag_inactive_text="Select Clothes Images"
-                multiple={true}
-            />
-            <div className={styles.buttonContainer}>
+            <div className={styles.fileSelectorContainer}>
+                <FileSelector
+                    className={styles.fileSelectorInput}
+                    set_files={set_clothes_images}
+                    drag_active_text="Drop Clothes Here"
+                    drag_inactive_text="Select Clothes Images"
+                    multiple={true}
+                />
+            </div>
+            <div className={styles.buttonGroup}>
                 <button className={styles.button} onClick={onBack}>Back</button>
                 <button
                     className={`${styles.button} ${clothes_images.length === 0 ? styles.buttonDisabled : ''}`}
@@ -31,3 +33,6 @@ export default function CreatorClothes({ clothes_images, set_clothes_images, onB
         </div>
     );
 }
+
+
+

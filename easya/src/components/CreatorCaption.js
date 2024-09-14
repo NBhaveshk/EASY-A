@@ -1,15 +1,39 @@
-import styles from './Creator.module.css'
+import styles from './Creator.module.css';
 
-export default function CreatorCaption({ cover_photo, clothes_images, receipt_images, caption, set_caption, onComplete, onBack }) {
-
+export default function CreateCaption({ cover_photo, clothes_images, receipt_images, caption, set_caption, onBack, onComplete }) {
     return (
-        <div>
-            <div className={styles.selected_images}>{cover_photo.map((image) => <img src={image} alt="cover" />)}</div>
-            <div className={styles.selected_images}>{clothes_images.map((image) => <img src={image} alt="clothes" />)}</div>
-            <div className={styles.selected_images}>{receipt_images.map((image) => <img src={image} alt="receipts" />)}</div>
-            <textarea value={caption} onChange={(event) => set_caption(event.target.value)} placeholder="Enter caption" />
-            <button onClick={onBack}>Back</button>
-            <button onClick={onComplete}>Post</button>
+        <div className={styles.captionContainer}>
+            {cover_photo && (
+                <img src={cover_photo} alt="cover" className={styles.previewImage} />
+            )}
+            <div className={styles.previewImages}>
+                {clothes_images.map((image, index) => (
+                    <img key={index} src={image} alt={`clothes-${index}`} className={styles.previewImage} />
+                ))}
+                {receipt_images.map((image, index) => (
+                    <img key={index} src={image} alt={`receipt-${index}`} className={styles.previewImage} />
+                ))}
+            </div>
+            <div className={styles.captionArea}>
+                <textarea
+                    className={styles.captionInput}
+                    value={caption}
+                    onChange={(e) => set_caption(e.target.value)}
+                    placeholder="Enter your caption here..."
+                />
+            </div>
+            <div className={styles.buttonGroup}>
+                <button className={styles.button} onClick={onBack}>Back</button>
+                <button
+                    className={`${styles.button} ${!caption ? styles.buttonDisabled : ''}`}
+                    onClick={onComplete}
+                    disabled={!caption}
+                >
+                    Create Post
+                </button>
+            </div>
         </div>
-    )
+    );
 }
+
+

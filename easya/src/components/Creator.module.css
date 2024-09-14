@@ -1,66 +1,132 @@
-.coverImageContainer {
+/* Consistent styling for all create containers */
+.createContainer {
     text-align: center;
+    padding: 15px; /* Reduced padding */
+    background-color: #f7f1f9; /* Soft pastel background */
+    border-radius: 8px; /* Slightly reduced border radius */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* Reduced shadow */
+    margin: 15px auto; /* Reduced margin */
+    max-width: 600px; /* Reduced max width */
 }
 
-.selectedImages {
+/* New styling for the FileSelector component */
+.fileSelectorContainer {
+    width: 250px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the FileSelector if needed */
+}
+
+.fileSelectorInput {
+    width: 100%; /* Ensure input takes the full width of the container */
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 10px; /* Adjust gap as needed */
+    margin-top: 20px; /* Add spacing above the buttons */
+}
+
+
+
+/* Styling for selected images (cover/clothes/receipts) */
+.selectedImages,
+.clothesImages {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 150px;
-    gap: 1em;
-    margin-bottom: 20px;
+    gap: 0.8em; /* Reduced gap between images */
+    margin-bottom: 15px; /* Reduced bottom margin */
+    flex-wrap: wrap;
 }
 
-.coverImage {
-    max-height: 100%;
-    max-width: 100%;
-    border-radius: 8px;
+.coverImage,
+.clothesImage {
+    max-height: 250px; /* Reduced image height */
+    max-width: 250px; /* Reduced image width */
+    border-radius: 6px; /* Slightly reduced border radius */
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Reduced shadow */
 }
 
+/* Button container and styling */
 .buttonContainer {
     display: flex;
     justify-content: space-between;
     max-width: 400px;
-    margin: 0 auto;
+    margin: 20px auto; /* Adjusted for spacing */
+}
+
+.uploadButtonContainer {
+    margin-bottom: 20px; /* Adds space between the upload button and Exit/Next buttons */
 }
 
 .button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #0a0a23;
+    padding: 8px 16px; /* Reduced padding */
+    font-size: 0.9rem; /* Reduced font size */
+    background-color: #e20060;
     color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px; /* Slightly reduced border radius */
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Reduced button shadow */
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #420c23;
 }
 
 .buttonDisabled {
-    background-color: #6c757d;
+    background-color: #8c003b;
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
-.clothesContainer {
+/* Styling for caption section */
+.captionContainer {
+    text-align: center;
+    margin: 15px auto; /* Reduced margin */
+    max-width: 500px; /* Reduced max width */
+}
+
+.captionArea {
+    margin-bottom: 15px; /* Reduced bottom margin */
+}
+
+.captionInput {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    font-size: 0.9rem; /* Reduced font size */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Slightly reduced border radius */
+    resize: vertical;
+    min-height: 80px; /* Reduced minimum height */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Preview images styling */
+.previewImages {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8em; /* Reduced gap */
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.previewImage {
+    max-height: 250px; /* Reduced height */
+    max-width: 250px; /* Reduced width */
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* General alignment and text styling */
+.clothesContainer,
+.coverImageContainer {
     text-align: center;
 }
 
-.clothesImages {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.clothesImage {
-    max-width: 150px;
-    max-height: 150px;
-    border-radius: 8px;
-    object-fit: cover;
-}

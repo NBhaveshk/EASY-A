@@ -1,7 +1,7 @@
 import FileSelector from "./FileSelector";
 import styles from './Creator.module.css';
 
-export default function CreatorCoverImage({ cover_image, set_cover_image, onComplete, onBack }) {
+export default function CreateCoverImage({ cover_image, set_cover_image, onComplete, onBack }) {
     return (
         <div className={styles.coverImageContainer}>
             {cover_image && (
@@ -11,13 +11,16 @@ export default function CreatorCoverImage({ cover_image, set_cover_image, onComp
                     ))}
                 </div>
             )}
-            <FileSelector
-                set_files={set_cover_image}
-                drag_active_text="Drop Photo Here"
-                drag_inactive_text="Select Cover Photo"
-                multiple={false}
-            />
-            <div className={styles.buttonContainer}>
+            <div className={styles.fileSelectorContainer}>
+                <FileSelector
+                    className={styles.fileSelectorInput}
+                    set_files={set_cover_image}
+                    drag_active_text="Drop Photo Here"
+                    drag_inactive_text="Select Cover Photo"
+                    multiple={false}
+                />
+            </div>
+            <div className={styles.buttonGroup}>
                 <button className={styles.button} onClick={onBack}>Exit</button>
                 <button
                     className={`${styles.button} ${!cover_image ? styles.buttonDisabled : ''}`}
@@ -30,3 +33,5 @@ export default function CreatorCoverImage({ cover_image, set_cover_image, onComp
         </div>
     );
 }
+
+
