@@ -6,8 +6,12 @@ import CreatorClothes from '../components/CreatorClothes'
 import CreatorReceipts from '../components/CreatorReceipts'
 import CreatorCaption from '../components/CreatorCaption'
 import { differenceInCalendarDays } from 'date-fns'
+import { useCommunity } from '../Context';
+import { useAuth } from '../Context';
 
 export default function Create() {
+    const { wallet_id } = useAuth()
+    const { create_post } = useCommunity()
     const [step, set_step] = useState(1)
     const [cover_image, set_cover_image] = useState(null)
     const [clothes_images, set_clothes_images] = useState([])
@@ -66,7 +70,14 @@ export default function Create() {
         }
     }, [receipt_images])
 
-    function create_post() {
+    function submit_post() {
+        create_post({
+            id: Date.now(),
+            cover_image,
+            images: [cover_image, ...clothes_images],
+            date: Date.now(),
+            author: wallet_id
+        })
         navigate("/")
     }
 
@@ -133,7 +144,7 @@ export default function Create() {
             {step === 1 && <CreatorCoverImage cover_image={cover_image} set_cover_image={set_cover_image} onComplete={next_step} onBack={() => navigate("/")} />}
             {step === 2 && <CreatorClothes clothes_images={clothes_images} set_clothes_images={set_clothes_images} onBack={previous_step} onComplete={next_step} />}
             {step === 3 && <CreatorReceipts receipt_images={receipt_images} set_receipt_images={set_receipt_images} onBack={previous_step} isNextAllowed={is_receipt_data_valid} onComplete={next_step} />}
-            {step === 4 && <CreatorCaption cover_photo={cover_image} clothes_images={clothes_images} receipt_images={receipt_images} caption={caption} set_caption={set_caption} onBack={previous_step} onComplete={create_post} />}
+            {step === 4 && <CreatorCaption cover_photo={cover_image} clothes_images={clothes_images} receipt_images={receipt_images} caption={caption} set_caption={set_caption} onBack={previous_step} onComplete={submit_post} />}
         </>
     )
 }
