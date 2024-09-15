@@ -1,32 +1,30 @@
 /* Consistent styling for all create containers */
 .createContainer {
     text-align: center;
-    padding: 15px; /* Reduced padding */
-    background-color: #f7f1f9; /* Soft pastel background */
-    border-radius: 8px; /* Slightly reduced border radius */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08); /* Reduced shadow */
-    margin: 15px auto; /* Reduced margin */
-    max-width: 600px; /* Reduced max width */
+    padding: 15px;
+    background-color: #f7f1f9;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    margin: 15px auto;
+    max-width: 600px;
 }
 
 /* New styling for the FileSelector component */
 .fileSelectorContainer {
-    width: 250px; /* Adjust width as needed */
-    margin: 0 auto; /* Center the FileSelector if needed */
+    width: 250px;
+    margin: 0 auto;
 }
 
 .fileSelectorInput {
-    width: 100%; /* Ensure input takes the full width of the container */
+    width: 100%;
 }
 
 .buttonGroup {
     display: flex;
-    justify-content: center; /* Centers the buttons horizontally */
-    gap: 10px; /* Adjust gap as needed */
-    margin-top: 20px; /* Add spacing above the buttons */
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
-
-
 
 /* Styling for selected images (cover/clothes/receipts) */
 .selectedImages,
@@ -35,18 +33,18 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.8em; /* Reduced gap between images */
-    margin-bottom: 15px; /* Reduced bottom margin */
+    gap: 0.8em;
+    margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
 .coverImage,
 .clothesImage {
-    max-height: 250px; /* Reduced image height */
-    max-width: 250px; /* Reduced image width */
-    border-radius: 6px; /* Slightly reduced border radius */
+    max-height: 250px;
+    max-width: 250px;
+    border-radius: 6px;
     object-fit: cover;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Reduced shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 /* Button container and styling */
@@ -54,54 +52,53 @@
     display: flex;
     justify-content: space-between;
     max-width: 400px;
-    margin: 20px auto; /* Adjusted for spacing */
+    margin: 20px auto;
 }
 
 .uploadButtonContainer {
-    margin-bottom: 20px; /* Adds space between the upload button and Exit/Next buttons */
+    margin-bottom: 20px;
 }
 
 .button {
-    padding: 8px 16px; /* Reduced padding */
-    font-size: 0.9rem; /* Reduced font size */
+    padding: 8px 16px;
+    font-size: 0.9rem;
     background-color: #e20060;
     color: #fff;
     border: none;
-    border-radius: 8px; /* Slightly reduced border radius */
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Reduced button shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .button:hover {
-    background-color: #420c23;
-}
-
+    background-color: #555;
+  }
+  
 .buttonDisabled {
-    background-color: #8c003b;
+    background-color: #777;
     cursor: not-allowed;
-    opacity: 0.7;
-}
+  }
 
 /* Styling for caption section */
 .captionContainer {
     text-align: center;
-    margin: 15px auto; /* Reduced margin */
-    max-width: 500px; /* Reduced max width */
+    margin: 15px auto;
+    max-width: 500px;
 }
 
 .captionArea {
-    margin-bottom: 15px; /* Reduced bottom margin */
+    margin-bottom: 15px;
 }
 
 .captionInput {
     width: 100%;
-    padding: 8px; /* Reduced padding */
-    font-size: 0.9rem; /* Reduced font size */
+    padding: 8px;
+    font-size: 0.9rem;
     border: 1px solid #ccc;
-    border-radius: 6px; /* Slightly reduced border radius */
+    border-radius: 6px;
     resize: vertical;
-    min-height: 80px; /* Reduced minimum height */
+    min-height: 80px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -111,14 +108,14 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.8em; /* Reduced gap */
+    gap: 0.8em;
     margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
 .previewImage {
-    max-height: 250px; /* Reduced height */
-    max-width: 250px; /* Reduced width */
+    max-height: 250px;
+    max-width: 250px;
     border-radius: 6px;
     object-fit: cover;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -129,4 +126,5 @@
 .coverImageContainer {
     text-align: center;
 }
+
 
