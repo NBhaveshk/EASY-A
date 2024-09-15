@@ -67,7 +67,7 @@ export default function Create() {
     }, [receipt_images])
 
     function create_post() {
-
+        navigate("/")
     }
 
     const sendToOpenAI = async (base64, type) => {
