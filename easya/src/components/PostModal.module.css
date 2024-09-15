@@ -30,8 +30,8 @@
     display: flex;
     justify-content: left;
     align-items: center;
-    width: 600px;
-    height: 600px;
+    width: min(600px, 80vw);
+    height: min(600px, 80vw);
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
