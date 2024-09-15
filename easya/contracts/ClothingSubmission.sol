@@ -21,7 +21,7 @@ contract ClothingSubmission {
    // Event to notify about new submission (Check if event is triggered on the frontend to potentially add transaction to the event log)
    event SubmissionMade(address indexed user, string itemName, string storeName, string fabricName);
 
-   // Function to submit a photo
+   // Function to submit a phot
    function submitPhoto(string memory itemName, string memory storeName, string memory fabricName, string memory imageUrl, string memory itemDescription) public {
        // Create the submission data
        SubmissionData memory newSubmission = SubmissionData({

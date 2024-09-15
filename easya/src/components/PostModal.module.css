@@ -11,7 +11,7 @@
     align-items: center;
 
     backdrop-filter: blur(3px);
-    z-index: 1;
+    z-index: 3;
 }
 
 .modal {
@@ -55,6 +55,7 @@
 }
 
 .image_controller>button {
+    all: unset;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -64,6 +65,35 @@
     left: 0;
 }
 
+.image_controller>button:first-child .icon {
+    padding-right: 2em;
+}
+
+.image_controller>button:first-child .icon:hover {
+    transform: translateX(-10px);
+}
+
 .image_controller>button:last-child {
     right: 0;
+}
+
+.image_controller>button:last-child .icon {
+    padding-left: 2em;
+}
+
+.image_controller>button:last-child .icon:hover {
+    transform: translateX(10px);
+}
+
+.icon {
+    color: #6c757d;
+    height: 24px;
+    width: 24px;
+    transition: color 0.3s, transform 0.3s;
+    cursor: pointer;
+    padding: 2em 1em;
+}
+
+.icon:hover {
+    color: #007bff;
 }
