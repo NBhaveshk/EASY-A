@@ -16,7 +16,7 @@ export default function PostModal({ data }) {
     const image_container_ref = useRef(null);
 
     useEffect(() => {
-        set_images([cover_image, <img key="2" src="https://picsum.photos/400/400" alt="random content" />, <img key="3" src="https://picsum.photos/400/400" alt="random content" />])
+        set_images([cover_image ])
     }, [id, cover_image])
 
     function handle_previous() {
