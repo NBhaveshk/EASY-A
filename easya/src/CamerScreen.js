@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 
 // Function to send image to OpenAI API and receive response
 const sendToOpenAI = async (base64, type) => {
-  const apiKey = "sk-y572_ewyYAVZ-iq-hrrGks88wbXaOI6SqbbbL_BXNLT3BlbkFJCJFOq_2nHGJvmAOYgF9yVKimblYY7mVGPLgh7UsykA"; // Read the API key from environment variables
+  const apiKey = ""; // Read the API key from environment variables
   const endpoint = "https://api.openai.com/v1/chat/completions"; // Correct API endpoint
   
   try {
